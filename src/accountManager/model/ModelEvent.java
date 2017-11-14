@@ -1,4 +1,4 @@
-package mvc;
+package accountManager.model;
 import java.awt.event.ActionEvent;
 
 /**

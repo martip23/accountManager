@@ -1,4 +1,4 @@
-package mvc;
+package accountManager.model;
 
 /**
  * @author martip23

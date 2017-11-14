@@ -1,4 +1,7 @@
-package mvc;
+package accountManager.controller;
+
+import accountManager.model.Model;
+import accountManager.view.View;
 
 /**
  * The root of the Controller class hierarchy is the AbstractController class.

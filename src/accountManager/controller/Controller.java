@@ -1,4 +1,7 @@
-package mvc;
+package accountManager.controller;
+
+import accountManager.model.Model;
+import accountManager.view.View;
 
 /**
  * The Controller interface is the interface which must be implemented by

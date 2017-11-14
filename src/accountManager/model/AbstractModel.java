@@ -1,7 +1,7 @@
 /**
  * 
  */
-package mvc;
+package accountManager.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 

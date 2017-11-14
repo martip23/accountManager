@@ -1,5 +1,10 @@
-package mvc;
+package accountManager.view;
 import javax.swing.*;
+
+import accountManager.controller.Controller;
+import accountManager.model.AbstractModel;
+import accountManager.model.Model;
+import accountManager.model.ModelListener;
 
 /**
  * The JFrameView class is the root class of the view class hierarchy for top level

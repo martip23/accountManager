@@ -1,4 +1,8 @@
-package mvc;
+package accountManager.view;
+
+import accountManager.controller.Controller;
+import accountManager.model.Model;
+
 /**
  * This interface must be implemented by all classes that wish to take the role
  * of the View within the MVC framework.
