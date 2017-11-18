@@ -8,7 +8,8 @@ See word document in root.
 See pdf in img.
 
 ## Class Diagram
-![MVC Account Manager Class Diagram](class diagram/accountManagerClass.svg)
+![MVC Account Manager Class Diagram](classDiagram/accountManagerClass.svg)
+<img src="/classDiagram/accountManagerClass.svg">
 
 ### Built With
 * [Eclipse](https://eclipse.org/ide/) - Eclipse Java Integrated Development Environment (IDE)
