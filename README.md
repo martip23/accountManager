@@ -7,7 +7,7 @@ See word document in root.
 ## GUI/Display
 <object data="media/display.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="media/display.pdf">
-        This browser does not support PDFs. Please download the PDF to view it: <a href="media/display.pdf">Download PDF</a>.</p>
+        This browser does not support PDFs. Click to view or download PDF: <a href="media/display.pdf">Download PDF</a>.</p>
     </embed>
 </object>
 
