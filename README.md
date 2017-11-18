@@ -2,14 +2,13 @@
 A software system for account management using "push" Model View Controller architecture. 
 
 ## Program Requirements
-This is next on the to-do list.
+See word document in root.
     
 ## GUI/Display
-The GUI should appear as follows.
+See pdf in img.
 
-![GUI picture 1](img/display1.jpg)
-
-![GUI picture 2](img/display2.jpg)
+## Class Diagram
+See .svg in class diagram.
 
 ### Built With
 * [Eclipse](https://eclipse.org/ide/) - Eclipse Java Integrated Development Environment (IDE)
