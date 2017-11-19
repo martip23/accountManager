@@ -12,7 +12,7 @@ public class Main {
 	/**
 	 * Takes a filename as an argument and loads the account data from the file
 	 * supports .csv. Syntax is as follows 
-	 * 		<String:Name>,<Int:UniqueID>,<String:Amount>
+	 * 		{String:Name},{Int:UniqueID},{String:Amount}
 	 * Multiple accounts should be separated by line breaks
 	 * @param args filename containing account information
 	 */

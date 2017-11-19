@@ -22,16 +22,17 @@ public class AccountModel extends AbstractModel {
 	 * @param initialBalance This should be in USD.
 	 */
 	AccountModel(int initialBalance) {
-
+		balance = initialBalance;
 	}
 	
 	/**
 	 * Deposits money to account increasing balance
 	 * @param val Amount to deposit.
 	 * @param currencyCode The currency the deposit is done in.
+	 * @TODO ask where currency conversions should be done.
 	 */
-	public void deposit(int val, String currencyCode) {
-		
+	public void deposit(int val) {
+		balance += val;
 	}
 	
 	/**
