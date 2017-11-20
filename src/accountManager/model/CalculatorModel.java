@@ -12,7 +12,7 @@ public class CalculatorModel extends AbstractModel {
 	
 	public void store(int value) {
 		current = value;
-		ModelEvent me = new ModelEvent(this, 1, "", current);
+		ModelEvent me = new ModelEvent(this, 1, "", current, "");
 		notifyChanged(me);
 	}
 	
@@ -35,7 +35,7 @@ public class CalculatorModel extends AbstractModel {
 		current = total;
 		
 		// now notify any interested parties in the new total
-		ModelEvent me = new ModelEvent(this, 1, "", total);
+		ModelEvent me = new ModelEvent(this, 1, "", total, "");
 		notifyChanged(me);
 	}
 }
