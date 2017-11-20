@@ -15,18 +15,21 @@ public class AccountModel extends AbstractModel {
 	
 	public String currentCurrency = "USD";
 	
-	/**
-	 * Balance should be stored as integer in the smallest denomination
-	 */
+
+	//Balance should be stored as integer in the smallest denomination
 	private int balance;
+	private int ID;
+	private String name;
 	
 	/**
 	 * This constructor initializes the balance to the value passed.
 	 * Value passed should be in USD cents.
 	 * @param initialBalance This should be in USD.
 	 */
-	AccountModel(int initialBalance) {
+	AccountModel(int initialBalance, int ID, String name) {
 		balance = initialBalance;
+		this.ID = ID;
+		this.name = name;
 		ModelEvent me = new ModelEvent(this, 1, "", balance, "USD");
 		notifyChanged(me);
 	}
