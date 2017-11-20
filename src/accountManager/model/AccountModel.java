@@ -41,6 +41,9 @@ public class AccountModel extends AbstractModel {
 	 * @TODO ask where currency conversions should be done.
 	 */
 	public void deposit(int val) {
+		if (val < 0) {
+			return; //@TODO insert exception
+		}
 		balance += val;
 		ModelEvent me = new ModelEvent(this, 1, "", balance, "USD");
 		notifyChanged(me);
@@ -75,5 +78,26 @@ public class AccountModel extends AbstractModel {
 						break;
 		}
 		return val;
+	}
+
+	/**
+	 * @return the balance
+	 */
+	public int getBalance() {
+		return balance;
+	}
+
+	/**
+	 * @return the iD
+	 */
+	public int getID() {
+		return ID;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
 	}
 }
