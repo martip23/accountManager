@@ -20,7 +20,7 @@ public class AgentModelTest {
 	}
 
 	@Test
-	public void testAutoDeposit1() {
+	public void testAutoDepositAndStop1() {
 		AccountModel accModel = new AccountModel(10000, 153, "Rodion");
 		AgentModel agModel = new AgentModel(101, accModel);
 		
@@ -37,12 +37,12 @@ public class AgentModelTest {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		agModel.blockAgent();
+		agModel.stopAgent();
 		assertEquals(230000, accModel.getBalance());
 	}
 		
 	@Test
-	public void testAutoDeposit2() {
+	public void testAutoDepositAndStop2() {
 		AccountModel accModel = new AccountModel(0, 999, "Steaks");
 		AgentModel agModel = new AgentModel(998546, accModel);
 		
@@ -59,7 +59,7 @@ public class AgentModelTest {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		agModel.blockAgent();
+		agModel.stopAgent();
 		assertEquals(280000, accModel.getBalance());
 	}
 

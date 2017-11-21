@@ -32,12 +32,13 @@ public class AgentModel extends AbstractModel {
 	
 	/**
 	 * Does an autoDeposit cycle based on variables entered.
+	 * Must run as its own thread!
 	 * @param value	Amount to deposit.
 	 * @param operationsPerSecond Delay between operations
+	 * @throws Value should not be < 0
 	 */
 	synchronized public void startAutoDeposit(int value, double operationsPerSecond)
 			throws IllegalArgumentException  {
-		
 		if (value < 0) {
 			throw new IllegalArgumentException("Value cannot be negative.");
 		}
@@ -57,11 +58,29 @@ public class AgentModel extends AbstractModel {
 	
 	/**
 	 * Does an autoWithdraw cycle based on variables entered.
+	 * Must run as its own thread!
 	 * @param value Amount to withdraw.
-	 * @param currencyCode The currency the withdraw is made in.
+	 * @param operationsPerSecond Delay between operations
+	 * @throws Value should not be < 0
+	 * @throws This method cannot overdraw accounts.
 	 */
-	public void autoWithdraw(int value, String currencyCode) throws OverdrawException {
-		
+	synchronized public void autoWithdraw(int value, double operationsPerSecond) 
+			throws OverdrawException, IllegalArgumentException {
+		if (value < 0) {
+			throw new IllegalArgumentException("Value cannot be negative");
+		}
+		while ((accountModel.getBalance() - value) < 0) {
+			state = BLOCKED;
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (state != STOPPED) {
+				state = RUNNING;
+				accountModel.withdraw(value);
+			}
+		}
 	}
 	
 	/**
