@@ -71,6 +71,8 @@ public class AgentModel extends AbstractModel {
 		}
 		while ((accountModel.getBalance() - value) < 0) {
 			state = BLOCKED;
+			ModelEvent me = new ModelEvent(this, 1, "stateChange", id, "");
+			notifyChanged(me);
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -79,6 +81,8 @@ public class AgentModel extends AbstractModel {
 			if (state != STOPPED) {
 				state = RUNNING;
 				accountModel.withdraw(value);
+				ModelEvent me2 = new ModelEvent(this, 1, "stateChange", id, "");
+				notifyChanged(me2);
 			}
 		}
 	}
@@ -105,15 +109,21 @@ public class AgentModel extends AbstractModel {
 	}
 	
 	/**
-	 * Set the state
-	 * @param state desired state
+	 * Set account state to STOPPED
 	 */
 	public void stopAgent() {
 		state = STOPPED;
+		ModelEvent me = new ModelEvent(this, 1, "stateChange", id, "");
+		notifyChanged(me);
 	}
-	
+
+	/**
+	 * Set account state to BLOCKED
+	 */
 	public void blockAgent() {
 		state = BLOCKED;
+		ModelEvent me = new ModelEvent(this, 1, "stateChange", id, "");
+		notifyChanged(me);
 	}
 
 	/**
