@@ -7,7 +7,7 @@ package accountManager.util;
  * Library to convert currencies.
  * @author martip23
  */
-public class currencyConverter {
+public class CurrencyConverter {
 	
 	static final double USD_TO_EUR = 0.79;
 	static final double USD_TO_JPY = 94.1;
