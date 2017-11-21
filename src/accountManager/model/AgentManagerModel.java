@@ -20,19 +20,43 @@ public class AgentManagerModel {
 	 * Creates an agent and keeps track of id
 	 * @param id ID of agent to be made
 	 * @param accModel Model for agent to manage
+	 * @throws DuplicateAgentIDException 
 	 */
-	public void agentCreator(int id, AccountModel accModel) {
+	public void createAgent(int id, AccountModel accModel) throws DuplicateAgentIDException {
 		for (int i = 0; i < agentsRunning; i++) {
 			if (id == agents.get(i).getId()){
-				// TODO Create and throw exception
-				System.out.println("ID already exists");
-				return;
+				throw new DuplicateAgentIDException();
 			}
-			else {
-				AgentModel agModel = new AgentModel(id, accModel);
-				agents.add(agModel);
-				agentIds.add(id);
+		AgentModel agModel = new AgentModel(id, accModel);
+		agents.add(agModel);
+		agentIds.add(id);
+		agentsRunning++;
+		}
+	}
+	
+	/**
+	 * Removes an agent from the list.
+	 * @param id ID of agent to remove.
+	 * @throws AgentNotStoppedException 
+	 * @throws NoAgentsRunningException 
+	 */
+	public void removeAgent(int id) 
+			throws AgentNotStoppedException, NoAgentsRunningException {
+		boolean found = false;
+		if (agentsRunning > 0) {
+			for (int i = 0; (i < agentsRunning) || (!found); i++) {
+				if (id == agents.get(i).getId()) {
+					found = true;
+					if (agents.get(i).getState() != "stopped") {
+						agents.remove(i);
+						agentsRunning--;
+					}
+					else 
+						throw new AgentNotStoppedException();
+				}
 			}
 		}
+		else 
+			throw new NoAgentsRunningException();
 	}
 }
