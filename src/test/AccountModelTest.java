@@ -7,7 +7,7 @@ public class AccountModelTest {
 
 	@Test
 	public void testAccountModel() {
-		AccountModel model = new AccountModel(500, 001, "Patrick");
+		AccountModel model = new AccountModel("Patrick", 001, 500);
 		assertEquals(500, model.getBalance());
 		assertEquals(001, model.getID());
 		assertEquals("Patrick", model.getName());
@@ -15,12 +15,12 @@ public class AccountModelTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testIllegalInitialBalance() {
-		AccountModel model = new AccountModel(-500, 001, "Patrick");
+		AccountModel model = new AccountModel("Patrick", 001, -500);
 	}
 
 	@Test
 	public void testDeposit() {
-		AccountModel model = new AccountModel(500, 001, "Patrick");
+		AccountModel model = new AccountModel("Patrick", 001, 500);
 		model.deposit(500);
 		assertEquals(1000, model.getBalance());
 		model.deposit(200);
@@ -35,13 +35,13 @@ public class AccountModelTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testIllegalArgumentDeposit() {
-		AccountModel model = new AccountModel(500, 001, "Patrick");
+		AccountModel model = new AccountModel("Patrick", 001, 500);
 		model.deposit(-500);
 	}
 
 	@Test
 	public void testWithdraw() throws OverdrawException {
-		AccountModel model = new AccountModel(10000, 001, "Patrick");
+		AccountModel model = new AccountModel("Patrick", 001, 10000);
 		model.withdraw(1000);
 		assertEquals(9000, model.getBalance());
 		model.withdraw(200);
@@ -56,7 +56,7 @@ public class AccountModelTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testIllegalArgumentWithdraw() throws OverdrawException {
-		AccountModel model = new AccountModel(500, 001, "Patrick");
+		AccountModel model = new AccountModel("Patrick", 001, 500);
 		model.withdraw(-200);
 	}
 }

@@ -12,7 +12,7 @@ public class AgentModelTest {
 
 	@Test
 	public void testAgentModel() {
-		AccountModel accModel = new AccountModel(500, 001, "Patrick");
+		AccountModel accModel = new AccountModel("Patrick", 001, 500);
 		AgentModel model = new AgentModel(001, accModel);
 		assertEquals(001, model.getId());
 		AgentModel model2 = new AgentModel(1553, accModel);
@@ -21,7 +21,7 @@ public class AgentModelTest {
 
 	@Test
 	public void testAutoDepositAndStop1() {
-		AccountModel accModel = new AccountModel(10000, 153, "Rodion");
+		AccountModel accModel = new AccountModel("Rodion", 153, 10000);
 		AgentModel agModel = new AgentModel(101, accModel);
 		
 		Runnable agentThread = new Runnable() {
@@ -43,7 +43,7 @@ public class AgentModelTest {
 		
 	@Test
 	public void testAutoDepositAndStop2() {
-		AccountModel accModel = new AccountModel(0, 999, "Steaks");
+		AccountModel accModel = new AccountModel("Steaks", 999, 0);
 		AgentModel agModel = new AgentModel(998546, accModel);
 		
 		Runnable agentThread = new Runnable() {

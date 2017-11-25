@@ -24,14 +24,14 @@ public class AccountModel extends AbstractModel {
 	 * @param initialBalance This should be in USD.
 	 * @throws IllegalArgumentException if initialBalance < 0
 	 */
-	public AccountModel(int initialBalance, int ID, String name) {
+	public AccountModel(String name, int id, int initialBalance) {
 		if (initialBalance < 0) {
 			throw new IllegalArgumentException("Initial balance cannot "
 					+ "be less than 0.");
 		}
 		else {
 			balance = initialBalance;
-			this.ID = ID;
+			this.ID = id;
 			this.name = name;
 			ModelEvent me = new ModelEvent(this, 1, "", balance, "USD");
 			notifyChanged(me);
