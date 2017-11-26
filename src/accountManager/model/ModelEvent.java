@@ -29,6 +29,7 @@ public class ModelEvent extends ActionEvent {
 	public ModelEvent (Object obj, int id, String message, int amount, String currency) {
 		super( obj, id, message);
 		this.amount = amount;
+		this.currency = currency;
 	}
 	
 	/**

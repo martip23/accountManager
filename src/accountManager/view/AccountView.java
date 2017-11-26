@@ -71,9 +71,19 @@ public class AccountView extends JFrameView {
 		
 		balanceField = new JTextField();
 		balanceField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		String balance = Integer.toString(model.getBalance());
-		balance = new StringBuilder(balance).insert(balance.length()-2,  ".").toString();
-		balanceField.setText(balance);
+		int balance = model.getBalance();
+		if (model.getEditCurrencyType() == "EUR") {
+			balance = CurrencyConverter.usdToEur(balance);
+		}
+		if (model.getEditCurrencyType() == "JPY") {
+			balance = CurrencyConverter.usdToJpy(balance);
+		}
+		String text = Integer.toString(balance);
+		while (text.length() < 3) {
+			text = new StringBuilder(text).insert(0, "0").toString();
+		}
+		text = new StringBuilder(text).insert(text.length()-2,  ".").toString();
+		balanceField.setText(text);
 		balanceField.setEditable(false);
 		GridBagConstraints gbc_balanceField = new GridBagConstraints();
 		gbc_balanceField.insets = new Insets(0, 0, 5, 0);

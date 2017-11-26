@@ -43,7 +43,6 @@ public class AccountModel extends AbstractModel {
 	 * @param val Amount to deposit.
 	 * @param currencyCode The currency the deposit is done in.
 	 * @throws IllegalArgumentException if value < 0
-	 * TODO ask where currency conversions should be done.
 	 */
 	public void deposit(int val) {
 		if (val < 0) {
@@ -51,7 +50,7 @@ public class AccountModel extends AbstractModel {
 		}
 		else {
 			balance += val;
-			ModelEvent me = new ModelEvent(this, 1, "", balance, "USD");
+			ModelEvent me = new ModelEvent(this, 1, "", balance, editCurrencyType);
 			notifyChanged(me);
 		}
 	}
