@@ -15,9 +15,14 @@ public class Main {
 	 * 		{String:Name},{Int:UniqueID},{String:Amount}
 	 * Multiple accounts should be separated by line breaks
 	 * @param args filename containing account information
+	 * @throws InvalidInputFileException 
 	 */
-	public static void main(String[] args) {
-		new AccountController();
-		System.out.println("Successfully compiled");
+	public static void main(String[] args) throws InvalidInputFileException {
+		if (args.length == 0 || args == null) {
+			System.out.println("FILE NOT FOUND");
+		}
+		else {
+			new AccountManagerController(args[0]);
+		}
 	}
 }

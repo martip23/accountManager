@@ -16,7 +16,7 @@ public class AccountManagerViewTest {
 	@Test
 	public void testAccountManagerView() throws IOException, InvalidInputFileException {
 		AccountManager model = new AccountManager("accounts.txt");
-		AccountManagerController controller = new AccountManagerController();
+		AccountManagerController controller = new AccountManagerController("accounts.txt");
 		
 		AccountManagerView view = new AccountManagerView(model, controller);
 		view.setVisible(true);

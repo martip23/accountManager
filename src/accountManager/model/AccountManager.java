@@ -36,7 +36,8 @@ public class AccountManager extends AbstractModel {
 		}
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}		
+		}
+
 	}
 	
 	/**
@@ -83,5 +84,10 @@ public class AccountManager extends AbstractModel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
-	}		
+	}	
+	
+	public void forceNotify() {
+		ModelEvent me = new ModelEvent(this, 1, "", accountData);
+		notifyChanged(me);
+	}
 }

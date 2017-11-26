@@ -19,6 +19,8 @@ public class AccountManagerController extends AbstractController {
 			e.printStackTrace();
 		}
 		setView(new AccountManagerView((AccountManager)getModel(), this));
+		((AccountManager) getModel()).forceNotify();
+		((JFrameView)getView()).setVisible(true);
 	}
 	
 	/**

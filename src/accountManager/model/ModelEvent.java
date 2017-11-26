@@ -1,5 +1,6 @@
 package accountManager.model;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 /**
  * Used to notify interested objects of changes in the state of a model
@@ -15,9 +16,10 @@ public class ModelEvent extends ActionEvent {
 	
 	private int amount;
 	private String currency;
+	private ArrayList<String> accountData;
 	
 	/**
-	 * Constructor for event.
+	 * Constructor for deposit/withdraw events.
 	 * @param obj Usually this.
 	 * @param id Give an ID. Not used in AccountManager.
 	 * @param message Name of command.
@@ -29,6 +31,25 @@ public class ModelEvent extends ActionEvent {
 		this.amount = amount;
 	}
 	
+	/**
+	 * Constructor for accountManager which reads account data.
+	 * @param obj Usually this.
+	 * @param id Give an ID. Not used in AccountManager.
+	 * @param message Name of command.
+	 * @param accountData ArrayList of all the accountData to display.
+	 */
+	public ModelEvent (Object obj, int id, String message, ArrayList<String> accountData) {
+		super( obj, id, message);
+		this.accountData = accountData;
+	}
+	
+	/**
+	 * @return the accountData
+	 */
+	public ArrayList<String> getAccountData() {
+		return accountData;
+	}
+
 	/**
 	 * Getter for amount.
 	 * @return Returns amount.

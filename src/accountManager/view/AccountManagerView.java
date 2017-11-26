@@ -4,6 +4,8 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import accountManager.controller.*;
 import accountManager.model.*;
 
@@ -21,8 +23,7 @@ public class AccountManagerView extends JFrameView {
 	public static final String SAVE = "Save";
 	public static final String EXIT = "Exit";
 	public static final String ACCOUNT_LABEL = "Accounts: ";
-	private String[] accountData = {"Dummy 100", "Person 025"};
-	JComboBox<String> accountList = new JComboBox<String>(accountData);
+	JComboBox<String> accountList = new JComboBox<String>();
 	
 	/**
 	 * Creates Account Manager view and registers model & controller.
@@ -50,8 +51,8 @@ public class AccountManagerView extends JFrameView {
 		lblAccount.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		splitPane.setLeftComponent(lblAccount);
 		
-		JComboBox comboBox = new JComboBox();
-		splitPane.setRightComponent(comboBox);
+		accountList = new JComboBox();
+		splitPane.setRightComponent(accountList);
 		
 		JPanel midPanel = new JPanel();
 		this.getContentPane().add(midPanel, BorderLayout.CENTER);
@@ -124,12 +125,17 @@ public class AccountManagerView extends JFrameView {
 	}
 	 
 	@Override
-	/*
-	 * (non-Javadoc)
-	 * @see accountManager.model.ModelListener#modelChanged(accountManager.model.ModelEvent)
+	/**
+	 * Set account text boxes
 	 */
 	public void modelChanged(ModelEvent event) {
-		// No modelChanged since the items in this view cannot be changed by other views.		
+		ArrayList<String> accountData = event.getAccountData();
+		String account = "";
+		for (int i = 0; i < accountData.size(); i+=3) {
+			account += ("" + accountData.get(i+1) + "  | " + accountData.get(i));
+			accountList.addItem(account);
+			account = "";
+		}
 	}
 	
 	class Handler implements ActionListener {
