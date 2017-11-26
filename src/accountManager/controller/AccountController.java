@@ -24,6 +24,9 @@ public class AccountController extends AbstractController {
 	 * @param option Button/Action requested.
 	 */
 	public void operation(String option) {
-		
+		if (option.equals(AccountView.DEPOSIT)) {
+			int value = Integer.parseInt(((AccountView)getView()).amountField.getText());
+			((AccountModel)getModel()).deposit(value);
+		}
 	}
 }

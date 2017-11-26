@@ -16,13 +16,20 @@ import accountManager.model.*;
 public class AccountView extends JFrameView {
 	
 	private JTextField balanceField;
-	private JTextField amountField;
+	public JTextField amountField;
 	private JButton btnDeposit;
 	private JButton btnWithdraw;
 	private JButton btnDismiss;
 	private JButton btnCreateWithdrawAgent;
 	private JButton btnCreateDepositAgent;
 
+	public static final String AVAIL_FUNDS = "Available funds: ";
+	public static final String DEPOSIT = "Deposit";
+	public static final String WITHDRAW = "Withdraw";
+	public static final String DISMISS = "Dismiss";
+	public static final String CREATE_W_AGENT = "Create withdraw agent";
+	public static final String CREATE_D_AGENT = "Create deposit agent";
+	
 	/**
 	 * Creates Account Manager view and registers model & controller.
 	 * @param model Model to register with view.
@@ -33,6 +40,7 @@ public class AccountView extends JFrameView {
 		
 		final String TITLE = (model.getName() + " " + model.getID() + ": "
 				+ "Operations in " + model.getEditCurrencyType());
+		final String AMOUNT = ("Enter amount in " + model.getEditCurrencyType() + ": ");
 		
 		Handler handler = new Handler();
 		
@@ -50,7 +58,7 @@ public class AccountView extends JFrameView {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		this.getContentPane().setLayout(gbl_contentPane);
 		
-		JLabel lblAvailableFunds = new JLabel("AVAILABLE FUNDS:");
+		JLabel lblAvailableFunds = new JLabel(AVAIL_FUNDS);
 		lblAvailableFunds.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblAvailableFunds = new GridBagConstraints();
 		gbc_lblAvailableFunds.gridwidth = 2;
@@ -74,7 +82,7 @@ public class AccountView extends JFrameView {
 		this.getContentPane().add(balanceField, gbc_balanceField);
 		balanceField.setColumns(10);
 		
-		JLabel lblAmount = new JLabel("AMOUNT");
+		JLabel lblAmount = new JLabel(AMOUNT);
 		lblAmount.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_lblAmount = new GridBagConstraints();
 		gbc_lblAmount.gridwidth = 2;
@@ -94,7 +102,8 @@ public class AccountView extends JFrameView {
 		this.getContentPane().add(amountField, gbc_amountField);
 		amountField.setColumns(10);
 		
-		btnDeposit = new JButton("DEPOSIT");
+		btnDeposit = new JButton(DEPOSIT);
+		btnDeposit.addActionListener(handler);
 		btnDeposit.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnDeposit = new GridBagConstraints();
 		gbc_btnDeposit.anchor = GridBagConstraints.EAST;
@@ -103,7 +112,8 @@ public class AccountView extends JFrameView {
 		gbc_btnDeposit.gridy = 4;
 		this.getContentPane().add(btnDeposit, gbc_btnDeposit);
 		
-		btnWithdraw = new JButton("WITHDRAW");
+		btnWithdraw = new JButton(WITHDRAW);
+		btnWithdraw.addActionListener(handler);
 		btnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnWithdraw = new GridBagConstraints();
 		gbc_btnWithdraw.insets = new Insets(0, 0, 5, 5);
@@ -111,7 +121,8 @@ public class AccountView extends JFrameView {
 		gbc_btnWithdraw.gridy = 4;
 		this.getContentPane().add(btnWithdraw, gbc_btnWithdraw);
 		
-		btnDismiss = new JButton("DISMISS");
+		btnDismiss = new JButton(DISMISS);
+		btnDismiss.addActionListener(handler);
 		btnDismiss.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnDismiss = new GridBagConstraints();
 		gbc_btnDismiss.anchor = GridBagConstraints.NORTH;
@@ -120,14 +131,16 @@ public class AccountView extends JFrameView {
 		gbc_btnDismiss.gridy = 5;
 		this.getContentPane().add(btnDismiss, gbc_btnDismiss);
 		
-		btnCreateWithdrawAgent = new JButton("CREATE WITHDRAW AGENT");
+		btnCreateWithdrawAgent = new JButton(CREATE_W_AGENT);
+		btnCreateWithdrawAgent.addActionListener(handler);
 		GridBagConstraints gbc_btnCreateWithdrawAgent = new GridBagConstraints();
 		gbc_btnCreateWithdrawAgent.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCreateWithdrawAgent.gridx = 0;
 		gbc_btnCreateWithdrawAgent.gridy = 7;
 		this.getContentPane().add(btnCreateWithdrawAgent, gbc_btnCreateWithdrawAgent);
 		
-		btnCreateDepositAgent = new JButton("CREATE DEPOSIT AGENT");
+		btnCreateDepositAgent = new JButton(CREATE_D_AGENT);
+		btnCreateDepositAgent.addActionListener(handler);
 		GridBagConstraints gbc_btnCreateDepositAgent = new GridBagConstraints();
 		gbc_btnCreateDepositAgent.gridwidth = 2;
 		gbc_btnCreateDepositAgent.gridx = 1;
@@ -140,7 +153,6 @@ public class AccountView extends JFrameView {
 		String balance = Integer.toString(event.getAmount());
 		balance = new StringBuilder(balance).insert(balance.length()-2,  ".").toString();
 		balanceField.setText(balance);
-		
 	}
 	
 	class Handler implements ActionListener {
