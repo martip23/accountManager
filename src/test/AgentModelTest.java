@@ -24,13 +24,7 @@ public class AgentModelTest {
 		AccountModel accModel = new AccountModel("Rodion", 153, 10000);
 		AgentModel agModel = new AgentModel(101, accModel);
 		
-		Runnable agentThread = new Runnable() {
-			public void run() {
-				agModel.startAutoDeposit(20000, 0.499);
-			}
-		};
-		
-		new Thread(agentThread).start();
+		agModel.startAutoDeposit(20000, 0.499);
 		
 		try {
 			TimeUnit.SECONDS.sleep(5);
@@ -63,9 +57,48 @@ public class AgentModelTest {
 		assertEquals(280000, accModel.getBalance());
 	}
 
-//	@Test
-//	public void testAutoWithdraw() {
-//		fail("Not yet implemented");
-//	}
-
+	@Test
+	public void testAutoWithdraw() {
+		AccountModel accModel = new AccountModel("Steaks", 001, 25000);
+		AgentModel agModel = new AgentModel(998546, accModel);
+		
+		try {
+			agModel.startAutoWithdraw(1000, 1.499);
+		} catch (IllegalArgumentException e1) {
+			e1.printStackTrace();
+		} catch (OverdrawException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			TimeUnit.SECONDS.sleep(5);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		agModel.stopAgent();
+		assertEquals(21000, accModel.getBalance());
+	}
+	
+	@Test
+	public void testSynchWithAndDepos() {
+		AccountModel accModel = new AccountModel("Patrick", 001, 10500);
+		AgentModel depModel = new AgentModel(001, accModel);
+		AgentModel withModel = new AgentModel(002, accModel);
+		
+		depModel.startAutoDeposit(5000, 1.005);
+		try {
+			withModel.startAutoWithdraw(1000, 1.499);
+		} catch (IllegalArgumentException | OverdrawException e) {
+			e.printStackTrace();
+		}
+		try {
+			TimeUnit.SECONDS.sleep(5);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		depModel.stopAgent();
+		withModel.stopAgent();
+		
+		assertEquals(31500, accModel.getBalance());		
+	}
 }

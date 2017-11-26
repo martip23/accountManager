@@ -1,5 +1,4 @@
 package accountManager.model;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Holds variables needed to make automated deposit/withdraw agent work.
@@ -43,15 +42,22 @@ public class AgentModel extends AbstractModel {
 			throw new IllegalArgumentException("Value cannot be negative.");
 		}
 		
-		state = RUNNING;
-		while (state != STOPPED) {
-			accountModel.deposit(value);
-			try {
-				wait((long)(operationsPerSecond * 1000));
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		startAgent();
+		
+		Runnable depThread = new Runnable() {
+			synchronized public void run() {
+				while (state != STOPPED) {		
+					accountModel.deposit(value);
+					try {
+						wait((long)(operationsPerSecond * 1000));
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 			}
-		}
+		};
+		
+		new Thread(depThread).start();
 	}
 	
 	
@@ -64,27 +70,44 @@ public class AgentModel extends AbstractModel {
 	 * @throws Value should not be < 0
 	 * @throws This method cannot overdraw accounts.
 	 */
-	synchronized public void autoWithdraw(int value, double operationsPerSecond) 
+	synchronized public void startAutoWithdraw(final int value, final double operationsPerSecond) 
 			throws OverdrawException, IllegalArgumentException {
 		if (value < 0) {
 			throw new IllegalArgumentException("Value cannot be negative");
 		}
 		while ((accountModel.getBalance() - value) < 0) {
-			state = BLOCKED;
-			ModelEvent me = new ModelEvent(this, 1, "stateChange", id, "");
-			notifyChanged(me);
+			blockAgent();
 			try {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			if (state != STOPPED) {
-				state = RUNNING;
-				accountModel.withdraw(value);
-				ModelEvent me2 = new ModelEvent(this, 1, "stateChange", id, "");
-				notifyChanged(me2);
-			}
 		}
+		
+		startAgent();
+		
+		Runnable withThread = new Runnable() {
+			synchronized public void run() {
+				while (state != STOPPED) {
+					try {
+						accountModel.withdraw(value);
+					} catch (OverdrawException e1) {
+						try {
+							blockAgent();
+							wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					try {
+						wait((long) (operationsPerSecond * 1000));
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		new Thread(withThread).start();
 	}
 	
 	/**
@@ -106,6 +129,15 @@ public class AgentModel extends AbstractModel {
 	 */
 	public String getState() {
 		return state;
+	}
+	
+	/**
+	 * Start agent and set state
+	 */
+	public void startAgent() {
+		state = RUNNING;
+		ModelEvent me = new ModelEvent(this, 1, "stateChange", id, "");
+		notifyChanged(me);
 	}
 	
 	/**

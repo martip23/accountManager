@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class AgentManagerModel {
 
 	//List to hold running agents
-	private ArrayList<AgentModel> agents = new ArrayList<AgentModel>();
+	public ArrayList<AgentModel> agents = new ArrayList<AgentModel>();
 	private ArrayList<Integer> agentIds = new ArrayList<Integer>();
 	int agentsRunning = 0;
 
@@ -27,11 +27,11 @@ public class AgentManagerModel {
 			if (id == agents.get(i).getId()){
 				throw new DuplicateAgentIDException();
 			}
+		}
 		AgentModel agModel = new AgentModel(id, accModel);
 		agents.add(agModel);
 		agentIds.add(id);
 		agentsRunning++;
-		}
 	}
 	
 	/**
