@@ -21,7 +21,7 @@ public class InputParsing {
 			StringBuilder sb = new StringBuilder(inputText);
 			sb.deleteCharAt(i);
 			inputText = sb.toString();
-			inputText.substring(0, i+2);
+			inputText = inputText.substring(0, i+2);
 			value = Integer.parseInt(inputText);
 			
 		}

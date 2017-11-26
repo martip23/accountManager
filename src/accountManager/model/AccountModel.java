@@ -33,7 +33,7 @@ public class AccountModel extends AbstractModel {
 			balance = initialBalance;
 			this.ID = id;
 			this.name = name;
-			ModelEvent me = new ModelEvent(this, 1, "", balance, "USD");
+			ModelEvent me = new ModelEvent(this, 1, "", balance, editCurrencyType);
 			notifyChanged(me);
 		}
 	}
@@ -61,6 +61,13 @@ public class AccountModel extends AbstractModel {
 	 */
 	public String getEditCurrencyType() {
 		return editCurrencyType;
+	}
+
+	/**
+	 * @param editCurrencyType the editCurrencyType to set
+	 */
+	public void setEditCurrencyType(String editCurrencyType) {
+		this.editCurrencyType = editCurrencyType;
 	}
 
 	/**

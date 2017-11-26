@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import accountManager.controller.*;
 import accountManager.model.*;
+import accountManager.util.CurrencyConverter;
 
 /**
  * Implements the GUI and I/O of GUI. Creates listeners and event 
@@ -150,9 +151,17 @@ public class AccountView extends JFrameView {
 
 	@Override
 	public void modelChanged(ModelEvent event) {
-		String balance = Integer.toString(event.getAmount());
-		balance = new StringBuilder(balance).insert(balance.length()-2,  ".").toString();
-		balanceField.setText(balance);
+		int balance = event.getAmount();
+		String output;
+		if (event.getCurrency() == "EUR") {
+			balance = CurrencyConverter.usdToEur(balance);
+		}
+		if (event.getCurrency() == "JPY") {
+			balance = CurrencyConverter.usdToJpy(balance);			
+		}
+		output = Integer.toString(balance);
+		output = new StringBuilder(output).insert(output.length()-2,  ".").toString();
+		balanceField.setText(output);
 	}
 	
 	class Handler implements ActionListener {

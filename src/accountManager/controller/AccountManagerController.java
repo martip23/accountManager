@@ -43,15 +43,16 @@ public class AccountManagerController extends AbstractController {
 		selectedAccount = ((AccountManagerView)getView()).accountList.getSelectedIndex();
 		
 		if (option.equals(AccountManagerView.EDIT_USD)) {
+			accounts.get(selectedAccount).setEditCurrencyType("USD");
 			new AccountController(accounts.get(selectedAccount), "USD");
 			
 		}
 		else if (option.equals(AccountManagerView.EDIT_JPY)) {
-	
+			accounts.get(selectedAccount).setEditCurrencyType("JPY");
 			new AccountController(accounts.get(selectedAccount), "JPY");
 		}
 		else if (option.equals(AccountManagerView.EDIT_EUR)) {
-
+			accounts.get(selectedAccount).setEditCurrencyType("EUR");
 			new AccountController(accounts.get(selectedAccount), "EUR");		
 		}
 		else if (option.equals(AccountManagerView.SAVE)) {
