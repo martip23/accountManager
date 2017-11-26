@@ -43,6 +43,7 @@ public class AccountModel extends AbstractModel {
 	 * @param val Amount to deposit.
 	 * @param currencyCode The currency the deposit is done in.
 	 * @throws IllegalArgumentException if value < 0
+	 * 
 	 */
 	public void deposit(int val) {
 		if (val < 0) {

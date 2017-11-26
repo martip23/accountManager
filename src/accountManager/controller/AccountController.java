@@ -63,7 +63,10 @@ public class AccountController extends AbstractController {
 				}
 			}
 			catch (OverdrawException e) {
-				
+				new ExceptionWindow("Insufficient funds: The amount to withdraw "
+						+ inputText + " is greater than available funds " + 
+						((AccountModel)getModel()).getBalance(), 
+						"OVERDRAW ERROR", false);				
 				}
 			}
 		else if (option.equals(AccountView.DISMISS)) {

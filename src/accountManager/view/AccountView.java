@@ -44,7 +44,6 @@ public class AccountView extends JFrameView {
 		final String AMOUNT = ("Enter amount in " + model.getEditCurrencyType() + ": ");
 		
 		Handler handler = new Handler();
-		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle(TITLE);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

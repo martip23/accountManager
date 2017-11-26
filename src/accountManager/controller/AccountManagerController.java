@@ -23,8 +23,7 @@ public class AccountManagerController extends AbstractController {
 		try {
 			setModel(new AccountManager(filename));
 		} catch (InvalidInputFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new ExceptionWindow("The input file is invalid!", "Invalid input file!", true);
 		}
 		numOfAccounts = ((AccountManager)getModel()).numOfAccounts();
 		for (int i = 0; i < numOfAccounts; i++)
