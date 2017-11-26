@@ -38,22 +38,23 @@ public class AccountManagerTest {
 		assertEquals(model.getID(), 002);
 		assertEquals(model.getName(), "Rodion");
 		
-		model.deposit(150000);
-		accManager.saveAccount(model);
+		model.deposit(100000);
+		accManager.updateBalance(model);
+		accManager.saveAccounts();
 		
 		AccountManager accMan2 = new AccountManager("accounts.txt");
 		model = accManager.selectAccount(2);
-		assertEquals(model.getBalance(), 250000);
+		assertEquals(model.getBalance(), 200000);
 		assertEquals(model.getID(), 002);
 		assertEquals(model.getName(), "Rodion");
 		
 		try {
-			model.withdraw(150000);
+			model.withdraw(100000);
 		} catch (OverdrawException e) {
 			e.printStackTrace();
 		}
-		
-		accMan2.saveAccount(model);
+		accMan2.updateBalance(model);
+		accMan2.saveAccounts();
 	}
 
 }

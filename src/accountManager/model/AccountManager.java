@@ -37,7 +37,8 @@ public class AccountManager extends AbstractModel {
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		ModelEvent me = new ModelEvent(this, 1, "", accountData);
+		notifyChanged(me);
 	}
 	
 	/**
@@ -53,13 +54,25 @@ public class AccountManager extends AbstractModel {
 				Integer.parseInt(accountData.get(++i)));
 		return model;
 	}
+
+	public void updateBalance(AccountModel model) {
+		Boolean found = false;
+		int index = 1;
+		
+		while (!found && accountData.size() > index) {
+			if((Integer.parseInt(accountData.get(index)) == model.getID())) {
+				found = true;
+				accountData.set((index + 1), Integer.toString(model.getBalance()));
+			}
+			else index += 3;
+		}		
+	}
 	
 	/**
 	 * Saves account state to file, pass in the model that is to be updated
 	 * @param model The model to update.
 	 */
 	public void saveAccounts() {
-		
 		File fnew = new File(filename);
 		try {
 			FileWriter fw = new FileWriter(fnew, false);
@@ -74,10 +87,5 @@ public class AccountManager extends AbstractModel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
-	}	
-	
-	public void forceNotify() {
-		ModelEvent me = new ModelEvent(this, 1, "", accountData);
-		notifyChanged(me);
 	}
 }
