@@ -23,7 +23,7 @@ public class AccountManagerView extends JFrameView {
 	public static final String SAVE = "Save";
 	public static final String EXIT = "Exit";
 	public static final String ACCOUNT_LABEL = "Accounts: ";
-	JComboBox<String> accountList = new JComboBox<String>();
+	public JComboBox<String> accountList = new JComboBox<String>();
 	
 	/**
 	 * Creates Account Manager view and registers model & controller.
@@ -37,7 +37,7 @@ public class AccountManagerView extends JFrameView {
 		
 		setResizable(false);
 		setTitle(TITLE);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 653, 220);
 
 		((JComponent) this.getContentPane()).setBorder(new EmptyBorder(5, 5, 5, 5));

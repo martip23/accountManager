@@ -19,7 +19,7 @@ public class ModelEvent extends ActionEvent {
 	private ArrayList<String> accountData;
 	
 	/**
-	 * Constructor for deposit/withdraw events.
+	 * Constructor for deposit/withdraw/updateBalance events.
 	 * @param obj Usually this.
 	 * @param id Give an ID. Not used in AccountManager.
 	 * @param message Name of command.

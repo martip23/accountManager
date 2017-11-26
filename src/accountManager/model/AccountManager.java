@@ -48,7 +48,7 @@ public class AccountManager extends AbstractModel {
 	 */
 	public AccountModel selectAccount(int index){
 		//Navigate to first element in selected account
-		int i = ((index-1) * setLength);
+		int i = (index * setLength);
 		AccountModel model = new AccountModel(accountData.get(i),
 				Integer.parseInt(accountData.get(++i)),
 				Integer.parseInt(accountData.get(++i)));
@@ -87,5 +87,10 @@ public class AccountManager extends AbstractModel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
+	}
+
+	public void forceNotify() {		
+		ModelEvent me = new ModelEvent(this, 1, "", accountData);		
+	 	notifyChanged(me);
 	}
 }

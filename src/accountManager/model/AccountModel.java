@@ -57,6 +57,13 @@ public class AccountModel extends AbstractModel {
 	}
 	
 	/**
+	 * @return the editCurrencyType
+	 */
+	public String getEditCurrencyType() {
+		return editCurrencyType;
+	}
+
+	/**
 	 * Withdraws money from account decreasing balance.
 	 * Throws exception if withdraw would overdraw account.
 	 * @param val Amount to withdraw.

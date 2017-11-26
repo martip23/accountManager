@@ -8,7 +8,8 @@ import accountManager.view.*;
  */
 public class AccountManagerController extends AbstractController {
 	
-	AccountModel selectedAccount;
+	public Boolean modified = true;
+	int selectedAccount;
 
 	/**
 	 * Registers a model and view with controller.
@@ -30,21 +31,27 @@ public class AccountManagerController extends AbstractController {
 	 * @param option Button/Action requested.
 	 */
 	public void operation(String option) {
+		selectedAccount = ((AccountManagerView)getView()).accountList.getSelectedIndex();
+		
 		if (option.equals(AccountManagerView.EDIT_USD)) {
-			
+			AccountModel model = ((AccountManager)getModel()).selectAccount(selectedAccount);
+			new AccountController(model, "USD");
 		}
 		else if (option.equals(AccountManagerView.EDIT_JPY)) {
-			
+			AccountModel model = ((AccountManager)getModel()).selectAccount(selectedAccount);
+			new AccountController(model, "JPY");
 		}
 		else if (option.equals(AccountManagerView.EDIT_EUR)) {
-			
+			AccountModel model = ((AccountManager)getModel()).selectAccount(selectedAccount);
+			new AccountController(model, "EUR");		
 		}
 		else if (option.equals(AccountManagerView.SAVE)) {
-			
 			((AccountManager) getModel()).saveAccounts();
 		}
 		else if (option.equals(AccountManagerView.EXIT)) {
-			
+			if (modified) 
+				((AccountManager) getModel()).saveAccounts();
+			System.exit(0);
 		}
 	}
 }
