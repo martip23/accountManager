@@ -10,15 +10,19 @@ import accountManager.view.*;
  */
 public class AgentManagerController extends AbstractController {
 
+	AccountModel account;
+	String withOrDep;
 
 	/**
 	 * Registers a model and view with controller.
+	 * @param  
 	 */
-	public AgentManagerController(AccountModel model) {
+	public AgentManagerController(AccountModel model, String withOrDep) {
+		account = model;
+		this.withOrDep = withOrDep;
 		setModel(new AgentManagerModel());
 
 		setView(new AgentManagerView((AgentManagerModel)getModel(), this));
-		((AccountManager) getModel()).forceNotify();
 		((JFrameView)getView()).setVisible(true);
 	}
 	

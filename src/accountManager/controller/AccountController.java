@@ -73,10 +73,10 @@ public class AccountController extends AbstractController {
 			((JFrameView)getView()).setVisible(false);
 		}
 		else if (option.equals(AccountView.CREATE_W_AGENT)) {
-			System.out.print("AGENT CREATED");
+			new AgentManagerController((AccountModel)getModel(), "W");
 		}
 		else if (option.equals(AccountView.CREATE_D_AGENT)) {
-			System.out.print("AGENT CREATED");
+			new AgentManagerController((AccountModel)getModel(), "D");
 		}
 		
 	}
