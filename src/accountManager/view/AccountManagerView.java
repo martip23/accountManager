@@ -29,8 +29,10 @@ public class AccountManagerView extends JFrameView {
 	 * @param model Model to register with view.
 	 * @param controller Controller to register with view.
 	 */
-	public AccountManagerView(AccountModel model, AccountController controller) {
+	public AccountManagerView(AccountManager model, AccountManagerController controller) {
 		super(model, controller);
+		
+		Handler handler = new Handler();
 		
 		setResizable(false);
 		setTitle(TITLE);
@@ -44,7 +46,7 @@ public class AccountManagerView extends JFrameView {
 		JSplitPane splitPane = new JSplitPane();
 		this.getContentPane().add(splitPane, BorderLayout.NORTH);
 		
-		JLabel lblAccount = new JLabel("Account:");
+		JLabel lblAccount = new JLabel(ACCOUNT_LABEL);
 		lblAccount.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		splitPane.setLeftComponent(lblAccount);
 		
@@ -60,7 +62,8 @@ public class AccountManagerView extends JFrameView {
 		gbl_midPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		midPanel.setLayout(gbl_midPanel);
 		
-		JButton dolsButton = new JButton("Edit account in dollars $");
+		JButton dolsButton = new JButton(EDIT_USD);
+		dolsButton.addActionListener(handler);
 		dolsButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_dolsButton = new GridBagConstraints();
 		gbc_dolsButton.anchor = GridBagConstraints.WEST;
@@ -69,7 +72,8 @@ public class AccountManagerView extends JFrameView {
 		gbc_dolsButton.gridy = 1;
 		midPanel.add(dolsButton, gbc_dolsButton);
 		
-		JButton yenButton = new JButton("Edit account in yehn");
+		JButton yenButton = new JButton(EDIT_JPY);
+		yenButton.addActionListener(handler);
 		yenButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		yenButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,7 +86,8 @@ public class AccountManagerView extends JFrameView {
 		gbc_yenButton.gridy = 1;
 		midPanel.add(yenButton, gbc_yenButton);
 		
-		JButton eurButton = new JButton("Edit account in eur");
+		JButton eurButton = new JButton(EDIT_EUR);
+		eurButton.addActionListener(handler);
 		eurButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_eurButton = new GridBagConstraints();
 		gbc_eurButton.anchor = GridBagConstraints.WEST;
@@ -99,14 +104,16 @@ public class AccountManagerView extends JFrameView {
 		gbl_panel.rowWeights = new double[]{0.0};
 		panel.setLayout(gbl_panel);
 		
-		JButton saveButton = new JButton("New button");
+		JButton saveButton = new JButton(SAVE);
+		saveButton.addActionListener(handler);
 		GridBagConstraints gbc_saveButton = new GridBagConstraints();
 		gbc_saveButton.insets = new Insets(0, 0, 0, 5);
 		gbc_saveButton.gridx = 0;
 		gbc_saveButton.gridy = 0;
 		panel.add(saveButton, gbc_saveButton);
 		
-		JButton exitButton = new JButton("New button");
+		JButton exitButton = new JButton(EXIT);
+		exitButton.addActionListener(handler);
 		GridBagConstraints gbc_exitButton = new GridBagConstraints();
 		gbc_exitButton.gridx = 1;
 		gbc_exitButton.gridy = 0;
@@ -117,14 +124,17 @@ public class AccountManagerView extends JFrameView {
 	}
 	 
 	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see accountManager.model.ModelListener#modelChanged(accountManager.model.ModelEvent)
+	 */
 	public void modelChanged(ModelEvent event) {
-		// TODO Auto-generated method stub
-		
+		// No modelChanged since the items in this view cannot be changed by other views.		
 	}
 	
 	class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
+			((AccountManagerController)getController()).operation(e.getActionCommand());
 		}
 	}
 }

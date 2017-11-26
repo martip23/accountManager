@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Takes a bank account file and parses file information.
  * @author Patrick Martinez
  */
-public class AccountManager {
+public class AccountManager extends AbstractModel {
 	
 	public final int setLength = 3;
 	ArrayList<String> accountData = new ArrayList<String>();

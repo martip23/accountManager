@@ -14,9 +14,9 @@ import accountManager.view.*;
 public class AccountManagerViewTest {
 
 	@Test
-	public void testAccountManagerView() throws IOException {
-		AccountModel model = new AccountModel(null, 0, 0);
-		AccountController controller = new AccountController();
+	public void testAccountManagerView() throws IOException, InvalidInputFileException {
+		AccountManager model = new AccountManager("accounts.txt");
+		AccountManagerController controller = new AccountManagerController();
 		
 		AccountManagerView view = new AccountManagerView(model, controller);
 		view.setVisible(true);

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Creates agents and prevents duplicate IDs. Also ensures that each agent
  * runs on its own thread.
  */
-public class AgentManagerModel {
+public class AgentManagerModel extends AbstractModel {
 
 	//List to hold running agents
 	public ArrayList<AgentModel> agents = new ArrayList<AgentModel>();
