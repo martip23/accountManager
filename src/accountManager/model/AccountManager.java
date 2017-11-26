@@ -58,18 +58,8 @@ public class AccountManager extends AbstractModel {
 	 * Saves account state to file, pass in the model that is to be updated
 	 * @param model The model to update.
 	 */
-	public void saveAccount(AccountModel model) {
+	public void saveAccounts() {
 		
-		Boolean found = false;
-		int index = 1;
-		
-		while (!found && accountData.size() > index) {
-			if((Integer.parseInt(accountData.get(index)) == model.getID())) {
-				found = true;
-				accountData.set((index + 1), Integer.toString(model.getBalance()));
-			}
-			else index += 3;
-		}
 		File fnew = new File(filename);
 		try {
 			FileWriter fw = new FileWriter(fnew, false);

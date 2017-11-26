@@ -7,6 +7,8 @@ import accountManager.view.*;
  * @author martip23
  */
 public class AccountManagerController extends AbstractController {
+	
+	AccountModel selectedAccount;
 
 	/**
 	 * Registers a model and view with controller.
@@ -28,6 +30,21 @@ public class AccountManagerController extends AbstractController {
 	 * @param option Button/Action requested.
 	 */
 	public void operation(String option) {
-		
+		if (option.equals(AccountManagerView.EDIT_USD)) {
+			
+		}
+		else if (option.equals(AccountManagerView.EDIT_JPY)) {
+			
+		}
+		else if (option.equals(AccountManagerView.EDIT_EUR)) {
+			
+		}
+		else if (option.equals(AccountManagerView.SAVE)) {
+			
+			((AccountManager) getModel()).saveAccounts();
+		}
+		else if (option.equals(AccountManagerView.EXIT)) {
+			
+		}
 	}
 }
