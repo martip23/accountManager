@@ -93,4 +93,8 @@ public class AccountManager extends AbstractModel {
 		ModelEvent me = new ModelEvent(this, 1, "", accountData);		
 	 	notifyChanged(me);
 	}
+	
+	public int numOfAccounts() {
+		return ((accountData.size() + 1) / 3);
+	}
 }

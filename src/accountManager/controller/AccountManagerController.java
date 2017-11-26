@@ -1,4 +1,6 @@
 package accountManager.controller;
+import java.util.ArrayList;
+
 import accountManager.model.*;
 import accountManager.view.*;
 
@@ -8,7 +10,10 @@ import accountManager.view.*;
  */
 public class AccountManagerController extends AbstractController {
 	
-	public Boolean modified = true;
+	public ArrayList<AccountModel> initAccounts = new ArrayList<AccountModel>();
+	public ArrayList<AccountModel> accounts = new ArrayList<AccountModel>();
+	public Boolean modified = false;
+	public int numOfAccounts;
 	int selectedAccount;
 
 	/**
@@ -21,6 +26,10 @@ public class AccountManagerController extends AbstractController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		numOfAccounts = ((AccountManager)getModel()).numOfAccounts();
+		for (int i = 0; i < numOfAccounts; i++)
+			initAccounts.add(((AccountManager)getModel()).selectAccount(i));
+		accounts = initAccounts;
 		setView(new AccountManagerView((AccountManager)getModel(), this));
 		((AccountManager) getModel()).forceNotify();
 		((JFrameView)getView()).setVisible(true);
@@ -34,22 +43,26 @@ public class AccountManagerController extends AbstractController {
 		selectedAccount = ((AccountManagerView)getView()).accountList.getSelectedIndex();
 		
 		if (option.equals(AccountManagerView.EDIT_USD)) {
-			AccountModel model = ((AccountManager)getModel()).selectAccount(selectedAccount);
-			new AccountController(model, "USD");
+			new AccountController(accounts.get(selectedAccount), "USD");
+			
 		}
 		else if (option.equals(AccountManagerView.EDIT_JPY)) {
-			AccountModel model = ((AccountManager)getModel()).selectAccount(selectedAccount);
-			new AccountController(model, "JPY");
+	
+			new AccountController(accounts.get(selectedAccount), "JPY");
 		}
 		else if (option.equals(AccountManagerView.EDIT_EUR)) {
-			AccountModel model = ((AccountManager)getModel()).selectAccount(selectedAccount);
-			new AccountController(model, "EUR");		
+
+			new AccountController(accounts.get(selectedAccount), "EUR");		
 		}
 		else if (option.equals(AccountManagerView.SAVE)) {
+			for (int i = 0; i < numOfAccounts; i++)
+				((AccountManager)getModel()).updateBalance(accounts.get(i));
 			((AccountManager) getModel()).saveAccounts();
 		}
 		else if (option.equals(AccountManagerView.EXIT)) {
-			if (modified) 
+			for (int i = 0; i < numOfAccounts; i++)
+				((AccountManager)getModel()).updateBalance(accounts.get(i));
+			if (initAccounts.equals(accounts)) 
 				((AccountManager) getModel()).saveAccounts();
 			System.exit(0);
 		}

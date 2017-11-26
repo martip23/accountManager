@@ -1,5 +1,6 @@
 package accountManager.controller;
 import accountManager.model.*;
+import accountManager.util.InputParsing;
 import accountManager.view.*;
 
 /**
@@ -25,8 +26,40 @@ public class AccountController extends AbstractController {
 	 */
 	public void operation(String option) {
 		if (option.equals(AccountView.DEPOSIT)) {
-			int value = Integer.parseInt(((AccountView)getView()).amountField.getText());
+			String inputText = ((AccountView)getView()).amountField.getText();
+			int value = InputParsing.inputToInt(inputText);
+			
+//			if (inputText.contains(".")) {
+//				int i = inputText.indexOf('.');
+//				StringBuilder sb = new StringBuilder(inputText);
+//				sb.deleteCharAt(i);
+//				inputText = sb.toString();
+//				inputText.substring(0, i+2);
+//				value = Integer.parseInt(inputText);
+//				
+//			}
+//			else { value = (Integer.parseInt(inputText) * 100); }
+			
 			((AccountModel)getModel()).deposit(value);
 		}
+		else if (option.equals(AccountView.WITHDRAW)) {
+			int value = Integer.parseInt(((AccountView)getView()).amountField.getText());
+			try {
+				((AccountModel)getModel()).withdraw(value);
+			} catch (OverdrawException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if (option.equals(AccountView.DISMISS)) {
+			((JFrameView)getView()).setVisible(false);
+		}
+		else if (option.equals(AccountView.CREATE_W_AGENT)) {
+			System.out.print("AGENT CREATED");
+		}
+		else if (option.equals(AccountView.CREATE_D_AGENT)) {
+			System.out.print("AGENT CREATED");
+		}
+		
 	}
 }
