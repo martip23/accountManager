@@ -11,6 +11,7 @@ import accountManager.model.*;
  * @author martip23
  *
  */
+@SuppressWarnings("serial")
 public class AgentView extends JFrameView {
 
 	/**

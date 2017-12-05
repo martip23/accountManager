@@ -15,6 +15,7 @@ import accountManager.model.*;
  * @author martip23
  *
  */
+@SuppressWarnings("serial")
 public class AccountManagerView extends JFrameView {
 	public static final String TITLE = "Account Manager by Patrick Martinez";
 	public static final String EDIT_USD = "Edit account in USD($)";

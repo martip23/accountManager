@@ -5,6 +5,7 @@ package accountManager.model;
  * @author martip23
  *
  */
+@SuppressWarnings("serial")
 public class OverdrawException extends Exception {
 	OverdrawException(String msg){
 		super(msg);

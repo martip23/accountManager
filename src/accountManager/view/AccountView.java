@@ -14,6 +14,7 @@ import accountManager.util.CurrencyConverter;
  * @author martip23
  *
  */
+@SuppressWarnings("serial")
 public class AccountView extends JFrameView {
 	
 	private JTextField balanceField;

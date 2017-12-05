@@ -22,6 +22,7 @@ import accountManager.model.*;
  * @author martip23
  *
  */
+@SuppressWarnings("serial")
 public class AgentManagerView extends JFrameView {
 	
 	private JPanel contentPane;
