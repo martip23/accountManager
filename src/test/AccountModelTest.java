@@ -13,6 +13,7 @@ public class AccountModelTest {
 		assertEquals("Patrick", model.getName());
 	}
 	
+	@SuppressWarnings("unused")
 	@Test(expected = IllegalArgumentException.class)
 	public void testIllegalInitialBalance() {
 		AccountModel model = new AccountModel("Patrick", 001, -500);

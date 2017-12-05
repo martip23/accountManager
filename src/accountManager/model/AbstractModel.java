@@ -12,8 +12,10 @@ import java.util.Iterator;
  */
 public class AbstractModel implements Model {
 	
+	@SuppressWarnings("rawtypes")
 	private ArrayList listeners = new ArrayList(5);
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	/**
 	 * Method that is called by subclasses of AbstractModel when they want to
@@ -31,6 +33,7 @@ public class AbstractModel implements Model {
 	/**
 	 * Add a ModelListener to the list of objects interested in ModelEvents
 	 */
+	@SuppressWarnings("unchecked")
 	public void addModelListener(ModelListener l) {
 		listeners.add(l);
 	}

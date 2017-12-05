@@ -17,6 +17,8 @@ import accountManager.util.CurrencyConverter;
 @SuppressWarnings("serial")
 public class AccountView extends JFrameView {
 	
+	public AccountModel model;
+	
 	private JTextField balanceField;
 	public JTextField amountField;
 	private JButton btnDeposit;
@@ -43,6 +45,8 @@ public class AccountView extends JFrameView {
 		final String TITLE = (model.getName() + " " + model.getID() + ": "
 				+ "Operations in " + model.getEditCurrencyType());
 		final String AMOUNT = ("Enter amount in " + model.getEditCurrencyType() + ": ");
+		
+		this.model = model;
 		
 		Handler handler = new Handler();
 		setResizable(false);
@@ -163,10 +167,10 @@ public class AccountView extends JFrameView {
 	public void modelChanged(ModelEvent event) {
 		int balance = event.getAmount();
 		String output;
-		if (event.getCurrency() == "EUR") {
+		if (this.model.getEditCurrencyType() == "EUR") {
 			balance = CurrencyConverter.usdToEur(balance);
 		}
-		if (event.getCurrency() == "JPY") {
+		else if (this.model.getEditCurrencyType() == "JPY") {
 			balance = CurrencyConverter.usdToJpy(balance);			
 		}
 		output = Integer.toString(balance);
